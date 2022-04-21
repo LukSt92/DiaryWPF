@@ -12,17 +12,22 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using DiaryWPF.Models;
+using DiaryWPF.ViewModels;
 
-namespace DiaryWPF
-{
-    /// <summary>
-    /// Interaction logic for AddEdditStudentView.xaml
-    /// </summary>
-    public partial class AddEdditStudentView : MetroWindow
+namespace DiaryWPF.Views
     {
-        public AddEdditStudentView()
+    /// <summary>
+    /// Interaction logic for AddEditStudentView.xaml
+    /// </summary>
+    public partial class AddEditStudentView : MetroWindow
+    {
+        public AddEditStudentView(Student student = null)
         {
             InitializeComponent();
+            DataContext = new AddEditStudentViewModel(student);
         }
+
     }
+    
 }
