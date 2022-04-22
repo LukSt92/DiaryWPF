@@ -14,7 +14,7 @@ using System.Windows.Input;
 
 namespace DiaryWPF.ViewModels
 {
-    class MainViewModel : ViewModelBase
+  public  class MainViewModel : ViewModelBase
     {
         public MainViewModel()
         {
