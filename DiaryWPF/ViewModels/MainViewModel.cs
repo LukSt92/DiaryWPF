@@ -1,5 +1,7 @@
 ﻿using DiaryWPF.Commands;
 using DiaryWPF.Models;
+using DiaryWPF.Models.Domains;
+using DiaryWPF.Models.Wrappers;
 using DiaryWPF.Views;
 using MahApps.Metro.Controls;
 using MahApps.Metro.Controls.Dialogs;
@@ -16,6 +18,7 @@ namespace DiaryWPF.ViewModels
 {
   public  class MainViewModel : ViewModelBase
     {
+        private Repository _repository = new Repository();
         public MainViewModel()
         {
             AddStudentsCommand = new RelayCommand(AddEditStudent);
@@ -30,12 +33,7 @@ namespace DiaryWPF.ViewModels
 
         private void RefreshDiary()
         {
-            Students = new ObservableCollection<Student>
-            {
-                new Student {FirstName = "Łukasz", LastName = "Stasiak", Group = new Group { Id = 1 } },
-                new Student {FirstName = "Marek", LastName = "Nowak", Group = new Group { Id = 2 } },
-                new Student {FirstName = "Jan", LastName = "Kowalski", Group = new Group { Id = 1 } },
-        };
+            Students = new ObservableCollection<StudentWrapper>(_repository.GetStudents(SelectedGroupId));
         }
 
 
@@ -45,9 +43,9 @@ namespace DiaryWPF.ViewModels
         public ICommand DeleteStudentsCommand { get; set; }
 
 
-        private Student _selectedStudent;
+        private StudentWrapper _selectedStudent;
 
-        public Student SelectedStudent
+        public StudentWrapper SelectedStudent
         {
             get { return _selectedStudent; }
             set
@@ -56,9 +54,9 @@ namespace DiaryWPF.ViewModels
                 OnPropertyChanged();
             }
         }
-        private ObservableCollection<Student> _students;
+        private ObservableCollection<StudentWrapper> _students;
 
-        public ObservableCollection<Student> Students
+        public ObservableCollection<StudentWrapper> Students
         {
             get { return _students; }
             set
@@ -94,13 +92,11 @@ namespace DiaryWPF.ViewModels
         
         private void InitGroups()
         {
-            Groups = new ObservableCollection<Group>
-            {
-                new Group {Id = 0, Name = "Wszystkie"},
-                new Group {Id = 0, Name = "1A"},
-                new Group {Id = 0, Name = "2A"},
+            var groups = _repository.GetGroups();
+            groups.Insert(0, new Group { Id = 0, Name = "Wszystkie" });
 
-            };
+            Groups = new ObservableCollection<Group>(groups);
+
 
             SelectedGroupId = 0;
         }
@@ -118,13 +114,15 @@ namespace DiaryWPF.ViewModels
             if (dialog != MessageDialogResult.Affirmative)
                 return;
 
+            _repository.DeleteStudent(SelectedStudent.Id);
+
             RefreshDiary();
         }
 
 
         private void AddEditStudent(object obj)
         {
-            var addEditStudentWindow = new AddEditStudentView(obj as Student);
+            var addEditStudentWindow = new AddEditStudentView(obj as StudentWrapper);
             addEditStudentWindow.Closed += AddEditStudentWindow_Closed;
             addEditStudentWindow.ShowDialog();
         }
@@ -138,6 +136,5 @@ namespace DiaryWPF.ViewModels
         {
             RefreshDiary();
         }
-
     }
 }
