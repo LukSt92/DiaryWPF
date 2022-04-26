@@ -1,0 +1,41 @@
+﻿<mah:MetroWindow x:Class="DiaryWPF.Views.SettingsView"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mah="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:DiaryWPF.Views" xmlns:viewmodels="clr-namespace:DiaryWPF.ViewModels" d:DataContext="{d:DesignInstance Type=viewmodels:SettingsViewModel}"
+        mc:Ignorable="d"
+                   WindowStartupLocation="CenterScreen"
+            Name="SettingsWindow"     
+        Title="Ustawienia" Height="450" Width="800">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="Auto" />
+            <ColumnDefinition />
+        </Grid.ColumnDefinitions>
+        <Label Grid.Row="1" Content="Nazwa Serwera:" Margin="5" />
+        <TextBox Text="{Binding ServerName}" Grid.Row="1" Grid.Column="1" Margin="5" />
+
+        <Label Grid.Row="2" Content="Naza Bazy Danych:" Margin="5" />
+        <TextBox Text="{Binding DatabaseName}" Grid.Row="2" Grid.Column="1" Margin="5" />
+
+        <Label Grid.Row="3" Content="Nazwa Użytkownika:" Margin="5" />
+        <TextBox Text="{Binding UserName}" Grid.Row="3" Grid.Column="1" Margin="5" />
+
+        <Label Grid.Row="4" Content="Hasło:" Margin="5" />
+        <TextBox Text="{Binding Password}" Grid.Row="4" Grid.Column="1" Margin="5" />
+        
+        <Button Command="{Binding CloseCommand}" CommandParameter="{Binding ElementName=SettingsWindow}" Grid.Row="5" Grid.Column="1" HorizontalAlignment="Left" Content="Anuluj" Height="25" Width="100" Margin="5" />
+        <Button Command="{Binding ConfirmCommand}" CommandParameter="{Binding ElementName=SettingsWindow}" Grid.Row="5" Grid.Column="1" HorizontalAlignment="Right" Content="Zapisz" Height="25" Width="100" Margin="5" />
+    </Grid>
+</mah:MetroWindow>
+
