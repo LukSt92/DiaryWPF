@@ -23,16 +23,16 @@
             <ColumnDefinition />
         </Grid.ColumnDefinitions>
         <Label Grid.Row="1" Content="Nazwa Serwera:" Margin="5" />
-        <TextBox Text="{Binding ServerName}" Grid.Row="1" Grid.Column="1" Margin="5" />
+        <TextBox Text="{Binding UserSettings.ServerName, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=true}" Grid.Row="1" Grid.Column="1" Margin="5" />
 
         <Label Grid.Row="2" Content="Naza Bazy Danych:" Margin="5" />
-        <TextBox Text="{Binding DatabaseName}" Grid.Row="2" Grid.Column="1" Margin="5" />
+        <TextBox Text="{Binding UserSettings.DatabaseName, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=true}" Grid.Row="2" Grid.Column="1" Margin="5" />
 
         <Label Grid.Row="3" Content="Nazwa Użytkownika:" Margin="5" />
-        <TextBox Text="{Binding UserName}" Grid.Row="3" Grid.Column="1" Margin="5" />
+        <TextBox Text="{Binding UserSettings.UserName, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=true}" Grid.Row="3" Grid.Column="1" Margin="5" />
 
         <Label Grid.Row="4" Content="Hasło:" Margin="5" />
-        <TextBox Text="{Binding Password}" Grid.Row="4" Grid.Column="1" Margin="5" />
+        <TextBox Text="{Binding UserSettings.Password, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=true}" Grid.Row="4" Grid.Column="1" Margin="5" />
         
         <Button Command="{Binding CloseCommand}" CommandParameter="{Binding ElementName=SettingsWindow}" Grid.Row="5" Grid.Column="1" HorizontalAlignment="Left" Content="Anuluj" Height="25" Width="100" Margin="5" />
         <Button Command="{Binding ConfirmCommand}" CommandParameter="{Binding ElementName=SettingsWindow}" Grid.Row="5" Grid.Column="1" HorizontalAlignment="Right" Content="Zapisz" Height="25" Width="100" Margin="5" />

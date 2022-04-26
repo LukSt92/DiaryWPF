@@ -1,4 +1,5 @@
 ﻿using DiaryWPF.Models.Domains;
+using DiaryWPF.Models.Wrappers;
 using DiaryWPF.ViewModels;
 using MahApps.Metro.Controls;
 using System;
@@ -22,10 +23,10 @@ namespace DiaryWPF.Views
     /// </summary>
     public partial class SettingsView : MetroWindow
     {
-        public SettingsView()
+        public SettingsView(bool canCloseWindow)
         {
             InitializeComponent();
-            DataContext = new SettingsViewModel();
+            DataContext = new SettingsViewModel(canCloseWindow);
         }
     }
 }

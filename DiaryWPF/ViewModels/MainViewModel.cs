@@ -25,11 +25,13 @@ namespace DiaryWPF.ViewModels
             EditStudentsCommand = new RelayCommand(AddEditStudent, CanEditDeleteStudent);
             DeleteStudentsCommand = new AsyncRelayCommand(DeleteStudent, CanEditDeleteStudent);
             RefreshStudentsCommand = new RelayCommand(RefreshStudents);
+            SettingsCommand = new RelayCommand(Settings);
+            LoadedWindowCommand = new AsyncRelayCommand(LoadedWindow);
 
-            RefreshDiary();
-            InitGroups();
-
+            Task task = LoadedWindow(null);
         }
+
+
 
         private void RefreshDiary()
         {
@@ -41,6 +43,8 @@ namespace DiaryWPF.ViewModels
         public ICommand AddStudentsCommand { get; set; }
         public ICommand EditStudentsCommand { get; set; }
         public ICommand DeleteStudentsCommand { get; set; }
+        public ICommand SettingsCommand { get; set; }
+        public ICommand LoadedWindowCommand { get; set; }
 
 
         private StudentWrapper _selectedStudent;
@@ -126,8 +130,45 @@ namespace DiaryWPF.ViewModels
             addEditStudentWindow.Closed += AddEditStudentWindow_Closed;
             addEditStudentWindow.ShowDialog();
         }
+        private void Settings(object obj)
+        {
+            var SettingsWindow = new SettingsView(true);
+            SettingsWindow.Closed += SettingsWindow_Closed;
+            SettingsWindow.ShowDialog();
+        }
+
+        private async Task LoadedWindow(object arg)
+        {
+            if (!IsValidConnectionToDatabase())
+            {
+                var metroWindow = Application.Current.MainWindow
+                    as MetroWindow;
+                var dialog = await metroWindow.ShowMessageAsync
+                    ("Błąd połączenia.", $"Nie można połączyć się z bazą danych. Czy chcesz zmienić ustawienia?", MessageDialogStyle.AffirmativeAndNegative);
+
+                if (dialog == MessageDialogResult.Negative)
+                    Application.Current.Shutdown();
+                else
+                {
+                    var settingswindow = new SettingsView(false);
+                    settingswindow.ShowDialog();
+                }
+            }
+            else
+            {
+                RefreshDiary();
+                InitGroups();
+            }
+
+
+
+        }
 
         private void AddEditStudentWindow_Closed(object sender, EventArgs e)
+        {
+            RefreshDiary();
+        }
+        private void SettingsWindow_Closed(object sender, EventArgs e)
         {
             RefreshDiary();
         }
@@ -136,5 +177,23 @@ namespace DiaryWPF.ViewModels
         {
             RefreshDiary();
         }
+        private bool IsValidConnectionToDatabase()
+        {
+            try
+            {
+                using (var context = new ApplicationDbContext())
+                {
+                    context.Database.Connection.Open();
+                    context.Database.Connection.Close();
+                }
+                return true;
+            }
+            catch (Exception)
+            {
+                return false;
+            }       
+        }
+
+
     }
 }

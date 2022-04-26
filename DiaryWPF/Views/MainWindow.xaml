@@ -3,11 +3,18 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+                 xmlns:i="http://schemas.microsoft.com/xaml/behaviors"
         xmlns:mah="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
         xmlns:local="clr-namespace:DiaryWPF" xmlns:viewmodels="clr-namespace:DiaryWPF.ViewModels" d:DataContext="{d:DesignInstance Type=viewmodels:MainViewModel}"
                  mc:Ignorable="d"
         WindowStartupLocation="CenterScreen"
         Title="Dziennik Ucznia" Height="600" Width="900">
+
+    <i:Interaction.Triggers>
+        <i:EventTrigger EventName="Loaded">
+            <i:InvokeCommandAction Command="{Binding LoadedWindowCommand}"/>
+        </i:EventTrigger>
+    </i:Interaction.Triggers>
 
     <Grid>
         <Grid.ColumnDefinitions>
@@ -48,6 +55,11 @@
                       SelectedValuePath="Id"/>
             <Button Command="{Binding RefreshStudentsCommand}"
                     Content="Odśwież"
+                    Height="25"
+                    Width="100"
+                    Margin="5"/>
+            <Button Command="{Binding SettingsCommand}"
+                    Content="Ustawienia"
                     Height="25"
                     Width="100"
                     Margin="5"/>

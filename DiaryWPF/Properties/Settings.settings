@@ -2,16 +2,16 @@
 <SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)" GeneratedClassNamespace="DiaryWPF.Properties" GeneratedClassName="Settings">
   <Profiles />
   <Settings>
-    <Setting Name="ServerName" Type="System.String" Scope="Application">
+    <Setting Name="ServerName" Type="System.String" Scope="User">
       <Value Profile="(Default)">(local)</Value>
     </Setting>
-    <Setting Name="DatabaseName" Type="System.String" Scope="Application">
+    <Setting Name="DatabaseName" Type="System.String" Scope="User">
       <Value Profile="(Default)">DiaryWPF</Value>
     </Setting>
-    <Setting Name="UserName" Type="System.String" Scope="Application">
+    <Setting Name="UserName" Type="System.String" Scope="User">
       <Value Profile="(Default)">Stachu</Value>
     </Setting>
-    <Setting Name="Password" Type="System.String" Scope="Application">
+    <Setting Name="Password" Type="System.String" Scope="User">
       <Value Profile="(Default)">123</Value>
     </Setting>
   </Settings>

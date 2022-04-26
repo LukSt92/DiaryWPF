@@ -23,39 +23,51 @@ namespace DiaryWPF.Properties {
             }
         }
         
-        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("(local)")]
         public string ServerName {
             get {
                 return ((string)(this["ServerName"]));
             }
+            set {
+                this["ServerName"] = value;
+            }
         }
         
-        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("DiaryWPF")]
         public string DatabaseName {
             get {
                 return ((string)(this["DatabaseName"]));
             }
+            set {
+                this["DatabaseName"] = value;
+            }
         }
         
-        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("Stachu")]
         public string UserName {
             get {
                 return ((string)(this["UserName"]));
             }
+            set {
+                this["UserName"] = value;
+            }
         }
         
-        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("123")]
         public string Password {
             get {
                 return ((string)(this["Password"]));
+            }
+            set {
+                this["Password"] = value;
             }
         }
     }
